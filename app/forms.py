@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, TextAreaField, SubmitField
 from wtforms.validators import DataRequired, Length, Email, EqualTo
 
 
@@ -16,3 +16,9 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     remember = BooleanField('Remember Me')
     submit = SubmitField('Login')
+
+
+class ProjectForm(FlaskForm):
+    name = StringField('Project Name', validators=[DataRequired(), Length(min=2, max=100)])
+    description = TextAreaField('Project Description', validators=[Length(max=200)])
+    submit = SubmitField('Create Project')
