@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, TextAreaField, SubmitField
-from wtforms.validators import DataRequired, Length, Email, EqualTo
+from wtforms import BooleanField, DateTimeField, PasswordField, SelectField, StringField, SubmitField, TextAreaField
+from wtforms.validators import DataRequired, Email, EqualTo, Length
 
 
 class RegistrationForm(FlaskForm):
@@ -22,3 +22,11 @@ class ProjectForm(FlaskForm):
     name = StringField('Project Name', validators=[DataRequired(), Length(min=2, max=100)])
     description = TextAreaField('Project Description', validators=[Length(max=200)])
     submit = SubmitField('Create Project')
+
+
+class TaskForm(FlaskForm):
+    name = StringField('Task Name', validators=[DataRequired(), Length(min=2, max=100)])
+    description = TextAreaField('Task Description', validators=[Length(max=200)])
+    deadline = DateTimeField('Due Date (YYYY-MM-DD HH:MM:SS)', format='%Y-%m-%d %H:%M:%S')
+    status = SelectField('Status', choices=[('Not Started', 'Not Started'), ('In Progress', 'In Progress'), ('Completed', 'Completed')])
+    submit = SubmitField('Save Task')
